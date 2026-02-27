@@ -16,16 +16,22 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wim5e9s))hq7$l(!r=_ipu-2s$q3!*-1$wi%dx%!7h=gi&8%1o'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
 
 
 # Application definition
@@ -37,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -74,8 +82,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hermes_db',
+        'USER': 'hermes_user',
+        'PASSWORD': 'password', 
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

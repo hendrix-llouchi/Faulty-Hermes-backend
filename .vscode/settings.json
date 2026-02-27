@@ -3,5 +3,10 @@
     "python.analysis.extraPaths": [
         "${workspaceFolder}/venv/Lib/site-packages"
     ],
-    "python.analysis.useLibraryCodeForTypes": true
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.venvPath": "${workspaceFolder}",
+    "python.analysis.venv": "venv",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.pythonPath": "${workspaceFolder}/venv/Scripts/python.exe"
 }
