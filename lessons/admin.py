@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Language, Module, Lesson, Exercise
+from .models import Language, Module, Lesson, Exercise, UserProgress
 
 @admin.register(Language)
 class LanguageAdmin(admin.ModelAdmin):
@@ -19,3 +19,8 @@ class LessonAdmin(admin.ModelAdmin):
 class ExerciseAdmin(admin.ModelAdmin):
     list_display = ('lesson', 'type')
     list_filter = ('type', 'lesson')
+
+@admin.register(UserProgress)
+class UserProgressAdmin(admin.ModelAdmin):
+    list_display = ('user', 'lesson', 'is_completed', 'completed_at')
+    list_filter = ('is_completed', 'lesson')
