@@ -1,9 +1,15 @@
 {
   "venvPath": ".",
   "venv": "venv",
-  "pythonVersion": "3.12",
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Windows",
   "extraPaths": [
     "./venv/Lib/site-packages"
   ],
-  "pythonPlatform": "Windows"
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "venv"
+  ]
 }
