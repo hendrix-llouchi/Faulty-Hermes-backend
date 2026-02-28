@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Language, Module, Lesson, Exercise
+from .models import Language, Module, Lesson, Exercise, UserProgress
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -30,3 +30,10 @@ class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
         fields = ['id', 'name', 'code', 'modules']
+
+
+class UserProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProgress
+        fields = ['id', 'lesson', 'is_completed', 'completed_at']
+        read_only_fields = ['lesson', 'is_completed', 'completed_at']
