@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     interests = models.JSONField(default=list)
     streak_days = models.IntegerField(default=0)
     xp = models.IntegerField(default=0)
-
+    last_activity_date = models.DateField(null=True, blank=True)
+    target_lang = models.CharField(max_length=10, default='en')  # Added for chat translation
     def __str__(self):
         return self.user.username
