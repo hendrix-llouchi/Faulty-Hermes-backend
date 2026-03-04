@@ -26,6 +26,10 @@ class Lesson(models.Model):
     def __str__(self):
         return f"{self.module.title} - {self.title}"
 
+    class Meta:
+        unique_together = ('module', 'order')
+        ordering = ['order']
+
 class Exercise(models.Model):
     EXERCISE_TYPES = (
         ('translate', 'Translation'),
@@ -37,6 +41,22 @@ class Exercise(models.Model):
     question = models.TextField()
     answer = models.TextField()
     options = models.JSONField(default=dict, blank=True) # For MCQ options
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return f"Exercise for {self.lesson.title}"
+
+
+class UserProgress(models.Model):
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='progress')
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='completions')
+    completed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('profile', 'lesson')  # prevent duplicate completions
+
+    def __str__(self):
+        return f"{self.profile.user.username} completed {self.lesson.title}"

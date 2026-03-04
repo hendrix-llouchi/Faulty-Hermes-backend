@@ -17,5 +17,5 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(Exercise)
 class ExerciseAdmin(admin.ModelAdmin):
-    list_display = ('lesson', 'type')
+    list_display = ('lesson', 'type', 'order', 'question')
     list_filter = ('type', 'lesson')
